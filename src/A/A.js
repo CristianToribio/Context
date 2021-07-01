@@ -1,9 +1,14 @@
 import React from 'react';
+import { ThemeContext } from '../Context/Context';
 
 
-export default function A(props) {
+export default function A() {
 
     return (
-        <p>Activado</p>
+        <ThemeContext.Consumer>
+            {({ text }) => (
+                <p>{text}</p>
+            )}
+        </ThemeContext.Consumer>
     );
 }
