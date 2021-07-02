@@ -1,24 +1,25 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { ThemeContext } from '../Context/Context';
-// import { useTheme } from 'MUI/core/styles';
+import { useFlag } from '../FlagProvider';
 
 
 export default function B() {
 
-    // const theme = useTheme();
+    const context = useFlag();
 
-    // theme.palette.primary;
+    console.log("Estado: "+context.flag)
+    console.log("Aleatorio: "+context.aleatorio)
+    console.log("codigo del color: "+context.COLORS[context.aleatorio])
 
     return (
-        <ThemeContext.Consumer>
-            {({ theme, cambiar, text }) => (
-                <Button
-                    onClick={cambiar}
-                    style={{ backgroundColor: theme.background }}>
-                    Cambiar Estado a {text === "Activado" ? "Desactivado" : "Activado"}
-                </Button>
-            )}
-        </ThemeContext.Consumer>
+        <Button
+            onClick={() => {
+                context.flag ? context.setFlag(false) : context.setFlag(true)
+                    ; context.setAleatorio(Math.floor((Math.random() * (15 - 0 + 1)) + 0))
+            }}
+            style={{ backgroundColor: context.COLORS[context.aleatorio] }}
+        >
+            Cambiar Estado a {context.flag ? "Desactivado" : "Activado"}
+        </Button>
     );
 }

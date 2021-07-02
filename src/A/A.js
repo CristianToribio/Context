@@ -1,14 +1,10 @@
 import React from 'react';
-import { ThemeContext } from '../Context/Context';
+import { useFlag } from '../FlagProvider';
 
 
 export default function A() {
 
-    return (
-        <ThemeContext.Consumer>
-            {({ text }) => (
-                <p>{text}</p>
-            )}
-        </ThemeContext.Consumer>
-    );
+    const context = useFlag();
+
+    return context.flag ? <p style={{ backgroundColor: context.COLORS[context.aleatorio] }}>Activado</p> : <p>Desactivado</p>;
 }
